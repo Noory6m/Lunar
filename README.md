@@ -1,6 +1,6 @@
 # Lunar Horizon
 ### An independent 3D lunar landing-site navigator
-https://youtu.be/56G1pI2wvts?feature=shared
+
 
 Here is the demonstration
 https://youtu.be/56G1pI2wvts?feature=shared
