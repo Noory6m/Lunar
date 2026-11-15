@@ -1,0 +1,2 @@
+// Model-scope status. A 'clear' result never asserts global lunar visibility.
+export function classifyRay(hit,elevation,coverageOK){if(hit)return {status:'blocked',reason:'Intersection with modeled terrain'};if(!coverageOK)return {status:'unknown',reason:'Incomplete terrain validity'};if(!Number.isFinite(elevation)||elevation<=0)return {status:'unknown',reason:'No local hit, but center at/below reference horizon; terrain outside footprint not resolved'};return {status:'clear',reason:'No terrain hit within finite model; center above reference horizon'};}

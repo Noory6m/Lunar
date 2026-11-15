@@ -1,0 +1,109 @@
+{
+  "baseline": {
+    "site": {
+      "lat": -89.46316,
+      "lon": -137.48955,
+      "ground": 1943.7008294750176,
+      "observerHeight": 2
+    },
+    "settings": {
+      "hours": 6,
+      "maxGap": 30,
+      "minSun": 100
+    },
+    "tested": 163,
+    "accepted": 44,
+    "selected": {
+      "start": 1795042800000,
+      "end": 1795064400000,
+      "sunClearMinutes": 360,
+      "earthClearMinutes": 360,
+      "jointClearMinutes": 360,
+      "unknownMinutes": 0,
+      "maxEarthGapMinutes": 0,
+      "pass": true,
+      "reasons": []
+    },
+    "statuses": {
+      "sun": {
+        "clear": 169
+      },
+      "earth": {
+        "blocked": 119,
+        "clear": 50
+      }
+    }
+  },
+  "scenarios": [
+    {
+      "file": "height-1m-step-60min.json",
+      "height": 1,
+      "stepMinutes": 60,
+      "fetchedAt": "2026-11-14T23:50:31.477493+00:00",
+      "assessment": {
+        "start": 1795042800000,
+        "end": 1795064400000,
+        "sunClearMinutes": 360,
+        "earthClearMinutes": 0,
+        "jointClearMinutes": 0,
+        "unknownMinutes": 0,
+        "maxEarthGapMinutes": 360,
+        "pass": false,
+        "reasons": [
+          "Earth gap exceeds limit"
+        ]
+      }
+    },
+    {
+      "file": "height-2m-step-5min.json",
+      "height": 2,
+      "stepMinutes": 5,
+      "fetchedAt": "2026-11-14T23:50:14.954837+00:00",
+      "assessment": {
+        "start": 1795042800000,
+        "end": 1795064400000,
+        "sunClearMinutes": 360,
+        "earthClearMinutes": 360,
+        "jointClearMinutes": 360,
+        "unknownMinutes": 0,
+        "maxEarthGapMinutes": 0,
+        "pass": true,
+        "reasons": []
+      }
+    },
+    {
+      "file": "height-2m-step-60min.json",
+      "height": 2,
+      "stepMinutes": 60,
+      "fetchedAt": "2026-11-14T23:50:47.360002+00:00",
+      "assessment": {
+        "start": 1795042800000,
+        "end": 1795064400000,
+        "sunClearMinutes": 360,
+        "earthClearMinutes": 360,
+        "jointClearMinutes": 360,
+        "unknownMinutes": 0,
+        "maxEarthGapMinutes": 0,
+        "pass": true,
+        "reasons": []
+      }
+    },
+    {
+      "file": "height-5m-step-60min.json",
+      "height": 5,
+      "stepMinutes": 60,
+      "fetchedAt": "2026-11-14T23:51:03.199110+00:00",
+      "assessment": {
+        "start": 1795042800000,
+        "end": 1795064400000,
+        "sunClearMinutes": 360,
+        "earthClearMinutes": 360,
+        "jointClearMinutes": 360,
+        "unknownMinutes": 0,
+        "maxEarthGapMinutes": 0,
+        "pass": true,
+        "reasons": []
+      }
+    }
+  ]
+}

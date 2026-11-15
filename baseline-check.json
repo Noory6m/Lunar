@@ -1,0 +1,35 @@
+{
+  "site": {
+    "lat": -89.46316,
+    "lon": -137.48955,
+    "ground": 1943.7008294750176,
+    "observerHeight": 2
+  },
+  "settings": {
+    "hours": 6,
+    "maxGap": 30,
+    "minSun": 100
+  },
+  "tested": 163,
+  "accepted": 44,
+  "selected": {
+    "start": 1795042800000,
+    "end": 1795064400000,
+    "sunClearMinutes": 360,
+    "earthClearMinutes": 360,
+    "jointClearMinutes": 360,
+    "unknownMinutes": 0,
+    "maxEarthGapMinutes": 0,
+    "pass": true,
+    "reasons": []
+  },
+  "statuses": {
+    "sun": {
+      "clear": 169
+    },
+    "earth": {
+      "blocked": 119,
+      "clear": 50
+    }
+  }
+}

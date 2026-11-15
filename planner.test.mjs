@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {searchWindows,assess,intervals,measure,transitionBrackets} from '../frontend/planner.js';
+import {classifyRay} from '../frontend/classification.js';
+const row=(minutes,sun='clear',earth='clear')=>({time:minutes*60000,sun:{status:sun},earth:{status:earth}});
+const cfg={hours:1,maxGap:0,minSun:100};
+test('exact duration and no endpoint double counting',()=>{const r=[row(0),row(30),row(60),row(90)];const x=assess(r,cfg);assert.equal(x.sunClearMinutes,60);assert.equal(x.earthClearMinutes,60);assert.equal(x.pass,true);assert.equal(searchWindows(r,cfg).accepted.length,2)});
+test('transition interval is unresolved and cannot satisfy constraints',()=>{const r=[row(0),row(30,'clear','blocked'),row(60)];const x=assess(r,{...cfg,maxGap:60});assert.equal(x.pass,false);assert.equal(x.unknownMinutes,60);assert.equal(transitionBrackets(r,'earth').length,2)});
+test('known Earth blackout allowed only within explicit threshold',()=>{const r=[row(0,'clear','blocked'),row(30,'clear','blocked'),row(60,'clear','blocked')];assert.equal(assess(r,{...cfg,maxGap:60}).pass,true);assert.equal(assess(r,{...cfg,maxGap:59}).pass,false)});
+test('unknown never passes even with permissive requirements',()=>{const r=[row(0,'unknown'),row(60,'unknown')];assert.equal(assess(r,{...cfg,minSun:0,maxGap:1000}).pass,false)});
+test('partial final interval measured by elapsed time',()=>{const r=[row(0),row(30),row(60)];assert.equal(assess(r,{...cfg,hours:.75}).sunClearMinutes,45)});
+test('irregular time spacing is weighted, not counted',()=>{const p=intervals([row(0),row(10),row(60)]);assert.equal(measure(p,0,60*60000).jointClearMinutes,60)});
+test('out-of-range, invalid time order and invalid requirements rejected',()=>{assert.throws(()=>assess([row(0),row(30)],cfg));assert.throws(()=>intervals([row(10),row(0)]));assert.throws(()=>assess([row(0),row(60)],{...cfg,minSun:101}))});
+test('candidate ties sorted by earliest start',()=>{const r=Array.from({length:5},(_,i)=>row(i*60));assert.deepEqual(searchWindows(r,cfg).accepted.map(c=>c.start),[0,60,120,180].map(x=>x*60000))});
+test('finer sampling can invalidate a coarse apparent pass',()=>{assert.equal(assess([row(0),row(60)],cfg).pass,true);const fine=Array.from({length:13},(_,i)=>row(i*5,'clear',i===6?'blocked':'clear'));assert.equal(assess(fine,cfg).pass,false)});
+test('coverage and negative-horizon no-hit are unknown',()=>{assert.equal(classifyRay(null,-1,true).status,'unknown');assert.equal(classifyRay(null,1,false).status,'unknown');assert.equal(classifyRay({distanceM:3},-1,true).status,'blocked');assert.equal(classifyRay(null,1,true).status,'clear')});
